@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		B5370EDA28C93139001566FF /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5370ED928C93139001566FF /* LoadingView.swift */; };
-		B5370EDE28C938E4001566FF /* GhostyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5370EDD28C938E4001566FF /* GhostyService.swift */; };
 		B5370EE028C9390D001566FF /* Ghosts.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5370EDF28C9390D001566FF /* Ghosts.swift */; };
 		B545959F28C7FB7E006CB520 /* GhostyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B545959E28C7FB7E006CB520 /* GhostyApp.swift */; };
 		B54595A128C7FB7E006CB520 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54595A028C7FB7E006CB520 /* ContentView.swift */; };
@@ -18,7 +17,6 @@
 
 /* Begin PBXFileReference section */
 		B5370ED928C93139001566FF /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
-		B5370EDD28C938E4001566FF /* GhostyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GhostyService.swift; sourceTree = "<group>"; };
 		B5370EDF28C9390D001566FF /* Ghosts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ghosts.swift; sourceTree = "<group>"; };
 		B545959B28C7FB7E006CB520 /* Ghosty.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ghosty.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B545959E28C7FB7E006CB520 /* GhostyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GhostyApp.swift; sourceTree = "<group>"; };
@@ -57,7 +55,6 @@
 		B5370EDC28C9388B001566FF /* services */ = {
 			isa = PBXGroup;
 			children = (
-				B5370EDD28C938E4001566FF /* GhostyService.swift */,
 			);
 			path = services;
 			sourceTree = "<group>";
@@ -172,7 +169,6 @@
 			files = (
 				B54595A128C7FB7E006CB520 /* ContentView.swift in Sources */,
 				B5370EE028C9390D001566FF /* Ghosts.swift in Sources */,
-				B5370EDE28C938E4001566FF /* GhostyService.swift in Sources */,
 				B545959F28C7FB7E006CB520 /* GhostyApp.swift in Sources */,
 				B5370EDA28C93139001566FF /* LoadingView.swift in Sources */,
 			);

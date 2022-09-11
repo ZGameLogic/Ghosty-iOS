@@ -8,7 +8,8 @@
 import Foundation
 
 
-struct Ghost: Decodable {
+struct Ghost: Identifiable, Decodable {
+    var id: Int
     var evidence : String
     var name : String
     var description: String

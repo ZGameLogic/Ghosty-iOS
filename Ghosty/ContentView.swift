@@ -11,14 +11,19 @@ struct ContentView: View {
     
     @State var isShowLoading = true
     @State var loadingProgress = 0.0
+    @State var results: Ghosts
     
     var body: some View {
-        LoadingView(isShowing: isShowLoading, progress: loadingProgress)
-    }
-}
-
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView(isShowLoading: true)
+        if(isShowLoading){
+            LoadingView(isShowing: $isShowLoading, progress: $loadingProgress, ghosts: $results)
+        } else {
+            List {
+                ForEach (results.ghosts.sorted {
+                    $0.name < $1.name
+                }) { ghost in
+                    Text(ghost.name)
+                }
+            }
+        }
     }
 }
