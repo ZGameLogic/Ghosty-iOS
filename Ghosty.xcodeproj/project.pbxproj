@@ -21,6 +21,7 @@
 
 /* Begin PBXFileReference section */
 		B528CE2828CF66F600F9FC6F /* Evidence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Evidence.swift; sourceTree = "<group>"; };
+		B528CE2A28CFA03800F9FC6F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		B5370ED928C93139001566FF /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		B5370EDF28C9390D001566FF /* Ghosts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ghosts.swift; sourceTree = "<group>"; };
 		B545959B28C7FB7E006CB520 /* Ghosty.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ghosty.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -89,6 +90,7 @@
 		B545959D28C7FB7E006CB520 /* Ghosty */ = {
 			isa = PBXGroup;
 			children = (
+				B528CE2A28CFA03800F9FC6F /* Info.plist */,
 				B5370EDC28C9388B001566FF /* services */,
 				B5370EDB28C93511001566FF /* data */,
 				B5370ED828C9311C001566FF /* views */,
@@ -334,6 +336,8 @@
 				DEVELOPMENT_TEAM = 6M38R97L4D;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Ghosty/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = iGhosty;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -363,6 +367,8 @@
 				DEVELOPMENT_TEAM = 6M38R97L4D;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Ghosty/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = iGhosty;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

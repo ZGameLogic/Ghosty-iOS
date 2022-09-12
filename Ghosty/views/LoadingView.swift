@@ -7,10 +7,13 @@
 
 import SwiftUI
 
+private let PROGRESS_STEP = 0.5
+
 struct LoadingView: View {
     
     @Binding var isShowing : Bool
     @State var progress = 0.0
+    
     @Binding var ghosts : Ghosts
     @Binding var evidences : Evidences
     
@@ -56,8 +59,7 @@ struct LoadingView: View {
                         if let response = try? JSONDecoder().decode(Evidences.self, from: data) {
                             DispatchQueue.main.async {
                                 self.evidences = response
-                                progress += 0.5
-                                print(evidences.evidence)
+                                progress += PROGRESS_STEP
                             }
                             return
                         }
@@ -79,7 +81,7 @@ struct LoadingView: View {
                         if let response = try? JSONDecoder().decode(Ghosts.self, from: data) {
                             DispatchQueue.main.async {
                                 self.ghosts = response
-                                progress += 0.5
+                                progress += PROGRESS_STEP
                             }
                             return
                         }

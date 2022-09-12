@@ -22,7 +22,7 @@ struct ContentView: View {
             LoadingView(isShowing: $isShowLoading, ghosts: $apiGhosts, evidences: $apiEvidence)
         } else {
             TabView (selection: $tabOn) {
-                InvestigationView(ghosts: apiGhosts.ghosts)
+                InvestigationView(ghosts: apiGhosts.ghosts, evidences: apiEvidence.evidence)
                 .tabItem({
                     Label("Investigation", systemImage: "magnifyingglass")
                 }).tag(1)
