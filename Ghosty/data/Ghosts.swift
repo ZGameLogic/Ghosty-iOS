@@ -10,13 +10,9 @@ import Foundation
 
 struct Ghost: Identifiable, Decodable {
     var id: Int
-    var evidence : String
+    var evidence : [String]
     var name : String
     var description: String
-    
-    func getEvidence() -> [String] {
-        return evidence.components(separatedBy: " ")
-    }
 }
 
 struct Ghosts: Decodable {

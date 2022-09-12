@@ -9,20 +9,27 @@ import SwiftUI
 
 struct ContentView: View {
     
+    // if we are getting the information or not
     @State var isShowLoading = true
-    @State var loadingProgress = 0.0
-    @State var results: Ghosts
+    
+    @State var apiGhosts: Ghosts
+    @State var apiEvidence: Evidences
+    
+    @State private var tabOn: Int = 1
     
     var body: some View {
         if(isShowLoading){
-            LoadingView(isShowing: $isShowLoading, progress: $loadingProgress, ghosts: $results)
+            LoadingView(isShowing: $isShowLoading, ghosts: $apiGhosts, evidences: $apiEvidence)
         } else {
-            List {
-                ForEach (results.ghosts.sorted {
-                    $0.name < $1.name
-                }) { ghost in
-                    Text(ghost.name)
-                }
+            TabView (selection: $tabOn) {
+                InvestigationView(ghosts: apiGhosts.ghosts)
+                .tabItem({
+                    Label("Investigation", systemImage: "magnifyingglass")
+                }).tag(1)
+                GhostListView(ghosts: apiGhosts)
+                .tabItem({
+                    Label("Journal", systemImage: "books.vertical")
+                }).tag(2)
             }
         }
     }
