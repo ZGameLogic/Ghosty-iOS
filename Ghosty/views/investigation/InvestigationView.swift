@@ -69,7 +69,18 @@ struct InvestigationView: View {
                     .onChange(of: ghostOrbChecked, perform: {old in updateView()})
                     .onChange(of: ghostWritingChecked, perform: {old in updateView()})
                     .onChange(of: spiritBoxChecked, perform: {old in updateView()})
+                    Button("Clear Evidence", action: {
+                        dotsChecked = false
+                        emfChecked = false
+                        fingerPrintChecked = false
+                        freezingTempChecked = false
+                        ghostOrbChecked = false
+                        ghostWritingChecked = false
+                        spiritBoxChecked = false
+                    })
+                    .padding()
                 }
+                
                 Section("Remaining ghosts"){
                     List {
                         ForEach(remainingGhosts, id:\.name) { ghost in
