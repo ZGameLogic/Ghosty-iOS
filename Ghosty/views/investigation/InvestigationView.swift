@@ -9,6 +9,8 @@ import SwiftUI
 
 struct InvestigationView: View {
     
+    @ObservedObject var model = InvestigationViewModel()
+    
     @State var orientation = UIDevice.current.orientation
     
     @State var ghosts : [Ghost]
@@ -18,21 +20,15 @@ struct InvestigationView: View {
     
     @State var remainingGhosts : [Ghost]
     
-    //"Ghost Orbs","Fingerprints","Freezing Temperatures","D.O.T.S. Projector","Spirit Box","Ghost Writing","EMF Level 5"
-    @State var ghostOrbChecked = false
-    @State var fingerPrintChecked = false
-    @State var freezingTempChecked = false
-    @State var dotsChecked = false
-    @State var spiritBoxChecked = false
-    @State var ghostWritingChecked = false
-    @State var emfChecked = false
-    
     @State var disabled = false
     
     init(ghosts: [Ghost], evidences: [String]){
         self.ghosts = ghosts
         self.evidences = evidences
         remainingGhosts = ghosts
+        for evidence in evidences {
+            model.addEvidence(evidence: evidence)
+        }
     }
     
     var body: some View {
@@ -40,43 +36,17 @@ struct InvestigationView: View {
             VStack {
                 Section("Evidence Gathered"){
                     List{
-                        Toggle("D.O.T.S. Projector", isOn: $dotsChecked)
-                            .padding([.leading, .trailing], 15)
-                            .disabled(disabled)
-                        Toggle("EMF Level 5", isOn: $emfChecked)
-                            .padding([.leading, .trailing], 15)
-                            .disabled(disabled)
-                        Toggle("Fingerprints", isOn: $fingerPrintChecked)
-                            .padding([.leading, .trailing], 15)
-                            .disabled(disabled)
-                        Toggle("Freezing Temperatures", isOn: $freezingTempChecked)
-                            .padding([.leading, .trailing], 15)
-                            .disabled(disabled)
-                        Toggle("Ghost Orbs", isOn: $ghostOrbChecked)
-                            .padding([.leading, .trailing], 15)
-                            .disabled(disabled)
-                        Toggle("Ghost Writing", isOn: $ghostWritingChecked)
-                            .padding([.leading, .trailing], 15)
-                            .disabled(disabled)
-                        Toggle("Spirit Box", isOn: $spiritBoxChecked)
-                            .padding([.leading, .trailing], 15)
-                            .disabled(disabled)
+                        ForEach (evidences, id: \.self) {evidence in
+                            Toggle(evidence,
+                                   isOn: model.evidencesChecked[evidence]!
+                            )
+                        }
                     }
-                    .onChange(of: dotsChecked, perform: {old in updateView()})
-                    .onChange(of: emfChecked, perform: {old in updateView()})
-                    .onChange(of: fingerPrintChecked, perform: {old in updateView()})
-                    .onChange(of: freezingTempChecked, perform: {old in updateView()})
-                    .onChange(of: ghostOrbChecked, perform: {old in updateView()})
-                    .onChange(of: ghostWritingChecked, perform: {old in updateView()})
-                    .onChange(of: spiritBoxChecked, perform: {old in updateView()})
+                    .onChange(of: model, perform: { newValue in
+                        
+                    })
                     Button("Clear Evidence", action: {
-                        dotsChecked = false
-                        emfChecked = false
-                        fingerPrintChecked = false
-                        freezingTempChecked = false
-                        ghostOrbChecked = false
-                        ghostWritingChecked = false
-                        spiritBoxChecked = false
+                        model.clearEvidence()
                     })
                     .padding()
                 }
@@ -113,14 +83,11 @@ struct InvestigationView: View {
     private func updateView(){
         remainingGhosts = []
         var foundEvidence : [String] = []
-        if(dotsChecked) {foundEvidence.append("D.O.T.S. Projector")}
-        if(emfChecked) {foundEvidence.append("EMF Level 5")}
-        if(fingerPrintChecked) {foundEvidence.append("Fingerprints")}
-        if(freezingTempChecked) {foundEvidence.append("Freezing Temperatures")}
-        if(ghostOrbChecked) {foundEvidence.append("Ghost Orbs")}
-        if(ghostWritingChecked) {foundEvidence.append("Ghost Writing")}
-        if(spiritBoxChecked) {foundEvidence.append("Spirit Box")}
-        
+        for(key, value) in model.evidencesChecked {
+            if(value) {
+                foundEvidence.append(key)
+            }
+        }
         currentEvidence = foundEvidence
         
         for ghost in ghosts {
@@ -136,5 +103,30 @@ struct InvestigationView_Previews: PreviewProvider {
     static var previews: some View {
         InvestigationView(ghosts: [Ghost(id: 1, evidence: ["Finger prints"], name: "Ben", description: "Spooky ghost")], evidences: ["Finger Prints", "EMF Level 5", "Freezing Temperatures", "Spirit Box", "Ghost Writing"])
             .previewInterfaceOrientation(.portrait)
+    }
+}
+
+
+public class InvestigationViewModel: ObservableObject, Equatable {
+    
+    @Published var evidencesChecked : [String:Bool] = [:]
+    
+    func addEvidence(evidence: String){
+        evidencesChecked[evidence] = false
+    }
+    
+    func clearEvidence(){
+        for(key, _) in evidencesChecked {
+            evidencesChecked[key] = false
+        }
+    }
+    
+    public static func == (lhs: InvestigationViewModel, rhs: InvestigationViewModel) -> Bool {
+        for (key, value) in lhs.evidencesChecked {
+            if(value != rhs.evidencesChecked[key]){
+                return true
+            }
+        }
+        return false
     }
 }
