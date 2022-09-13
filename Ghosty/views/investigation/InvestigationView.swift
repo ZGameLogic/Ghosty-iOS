@@ -102,6 +102,8 @@ struct InvestigationView: View {
         for (key, _) in model.evidencesDisabled {
             if(!possibleEvidence.contains(key)){
                 model.evidencesDisabled[key] = true
+            } else {
+                model.evidencesDisabled[key] = false
             }
         }
     }
