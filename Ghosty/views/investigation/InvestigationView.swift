@@ -38,8 +38,8 @@ struct InvestigationView: View {
                     List{
                         ForEach (evidences, id: \.self) {evidence in
                             Toggle(evidence,
-                                   isOn: model.binding(for: evidence)
-                            )
+                                   isOn: model.checkedBinding(for: evidence)
+                            ).disabled(model.evidencesDisabled[evidence]!)
                         }
                     }
                     .onChange(of: model, perform: { newValue in
@@ -89,10 +89,19 @@ struct InvestigationView: View {
             }
         }
         currentEvidence = foundEvidence
+        var possibleEvidence : Set<String> = []
         
         for ghost in ghosts {
             if(ghost.isValid(currentEvidence: foundEvidence)){
                 remainingGhosts.append(ghost)
+                for evidence in ghost.evidence {
+                    possibleEvidence.insert(evidence)
+                }
+            }
+        }
+        for (key, _) in model.evidencesDisabled {
+            if(!possibleEvidence.contains(key)){
+                model.evidencesDisabled[key] = true
             }
         }
     }
@@ -110,22 +119,33 @@ struct InvestigationView_Previews: PreviewProvider {
 public class InvestigationViewModel: ObservableObject, Equatable {
     
     @Published var evidencesChecked : [String:Bool] = [:]
+    @Published var evidencesDisabled : [String:Bool] = [:]
     
     func addEvidence(evidence: String){
         evidencesChecked[evidence] = false
+        evidencesDisabled[evidence] = false
     }
     
     func clearEvidence(){
         for(key, _) in evidencesChecked {
             evidencesChecked[key] = false
+            evidencesDisabled[key] = false
         }
     }
     
-    func binding(for key: String) -> Binding<Bool> {
+    func checkedBinding(for key: String) -> Binding<Bool> {
         return Binding(get: {
             return self.evidencesChecked[key] ?? false
         }, set: {
             self.evidencesChecked[key] = $0
+        })
+    }
+    
+    func disabledBinding(for key: String) -> Binding<Bool> {
+        return Binding(get: {
+            return self.evidencesDisabled[key] ?? false
+        }, set: {
+            self.evidencesDisabled[key] = $0
         })
     }
     
