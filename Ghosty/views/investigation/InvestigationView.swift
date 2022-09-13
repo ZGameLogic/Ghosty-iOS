@@ -53,7 +53,9 @@ struct InvestigationView: View {
                 
                 Section("Remaining ghosts"){
                     List {
-                        ForEach(remainingGhosts, id:\.name) { ghost in
+                        ForEach(remainingGhosts.sorted {
+                            $0.name < $1.name
+                        }, id:\.name) { ghost in
                             NavigationLink {
                                 GhostDetailView(ghost: ghost)
                             } label: {
