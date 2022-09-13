@@ -38,12 +38,12 @@ struct InvestigationView: View {
                     List{
                         ForEach (evidences, id: \.self) {evidence in
                             Toggle(evidence,
-                                   isOn: model.evidencesChecked[evidence]!
+                                   isOn: model.binding(for: evidence)
                             )
                         }
                     }
                     .onChange(of: model, perform: { newValue in
-                        
+                        updateView()
                     })
                     Button("Clear Evidence", action: {
                         model.clearEvidence()
@@ -119,6 +119,14 @@ public class InvestigationViewModel: ObservableObject, Equatable {
         for(key, _) in evidencesChecked {
             evidencesChecked[key] = false
         }
+    }
+    
+    func binding(for key: String) -> Binding<Bool> {
+        return Binding(get: {
+            return self.evidencesChecked[key] ?? false
+        }, set: {
+            self.evidencesChecked[key] = $0
+        })
     }
     
     public static func == (lhs: InvestigationViewModel, rhs: InvestigationViewModel) -> Bool {
