@@ -14,12 +14,13 @@ struct ContentView: View {
     
     @State var apiGhosts: Ghosts
     @State var apiEvidence: Evidences
+    @State var apiAspects: Aspects
     
     @State private var tabOn: Int = 1
     
     var body: some View {
         if(isShowLoading){
-            LoadingView(isShowing: $isShowLoading, ghosts: $apiGhosts, evidences: $apiEvidence)
+            LoadingView(isShowing: $isShowLoading, ghosts: $apiGhosts, evidences: $apiEvidence, aspects: $apiAspects)
         } else {
             TabView (selection: $tabOn) {
                 InvestigationView(ghosts: apiGhosts.ghosts, evidences: apiEvidence.evidence)
@@ -30,7 +31,11 @@ struct ContentView: View {
                 .tabItem({
                     Label("Journal", systemImage: "books.vertical")
                 }).tag(2)
-            }
+                AspectListView(aspects: apiAspects)
+                .tabItem ({
+                    Label("Aspects", systemImage: "books.vertical")
+                }).tag(3)
+        }
         }
     }
 }

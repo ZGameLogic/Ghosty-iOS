@@ -10,6 +10,9 @@
 		B528CE2928CF66F600F9FC6F /* Evidence.swift in Sources */ = {isa = PBXBuildFile; fileRef = B528CE2828CF66F600F9FC6F /* Evidence.swift */; };
 		B5370EDA28C93139001566FF /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5370ED928C93139001566FF /* LoadingView.swift */; };
 		B5370EE028C9390D001566FF /* Ghosts.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5370EDF28C9390D001566FF /* Ghosts.swift */; };
+		B5404BA128D3BB2F00489FFE /* Aspects.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5404BA028D3BB2F00489FFE /* Aspects.swift */; };
+		B5404BA528D3BC3D00489FFE /* AspectListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5404BA428D3BC3D00489FFE /* AspectListView.swift */; };
+		B5404BA728D3BC4A00489FFE /* AspectDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5404BA628D3BC4A00489FFE /* AspectDetailView.swift */; };
 		B545959F28C7FB7E006CB520 /* GhostyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B545959E28C7FB7E006CB520 /* GhostyApp.swift */; };
 		B54595A128C7FB7E006CB520 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54595A028C7FB7E006CB520 /* ContentView.swift */; };
 		B54595A328C7FB7E006CB520 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B54595A228C7FB7E006CB520 /* Assets.xcassets */; };
@@ -24,6 +27,9 @@
 		B528CE2A28CFA03800F9FC6F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		B5370ED928C93139001566FF /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		B5370EDF28C9390D001566FF /* Ghosts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ghosts.swift; sourceTree = "<group>"; };
+		B5404BA028D3BB2F00489FFE /* Aspects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Aspects.swift; sourceTree = "<group>"; };
+		B5404BA428D3BC3D00489FFE /* AspectListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AspectListView.swift; sourceTree = "<group>"; };
+		B5404BA628D3BC4A00489FFE /* AspectDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AspectDetailView.swift; sourceTree = "<group>"; };
 		B545959B28C7FB7E006CB520 /* Ghosty.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ghosty.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B545959E28C7FB7E006CB520 /* GhostyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GhostyApp.swift; sourceTree = "<group>"; };
 		B54595A028C7FB7E006CB520 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -48,6 +54,7 @@
 		B5370ED828C9311C001566FF /* views */ = {
 			isa = PBXGroup;
 			children = (
+				B5404BA328D3BC1F00489FFE /* aspects */,
 				B56BDCDE28CE6C73007517E3 /* investigation */,
 				B56BDCD928CE6B62007517E3 /* ghost */,
 				B5370ED928C93139001566FF /* LoadingView.swift */,
@@ -60,6 +67,7 @@
 			children = (
 				B5370EDF28C9390D001566FF /* Ghosts.swift */,
 				B528CE2828CF66F600F9FC6F /* Evidence.swift */,
+				B5404BA028D3BB2F00489FFE /* Aspects.swift */,
 			);
 			path = data;
 			sourceTree = "<group>";
@@ -69,6 +77,15 @@
 			children = (
 			);
 			path = services;
+			sourceTree = "<group>";
+		};
+		B5404BA328D3BC1F00489FFE /* aspects */ = {
+			isa = PBXGroup;
+			children = (
+				B5404BA428D3BC3D00489FFE /* AspectListView.swift */,
+				B5404BA628D3BC4A00489FFE /* AspectDetailView.swift */,
+			);
+			path = aspects;
 			sourceTree = "<group>";
 		};
 		B545959228C7FB7E006CB520 = {
@@ -197,13 +214,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B5404BA528D3BC3D00489FFE /* AspectListView.swift in Sources */,
 				B54595A128C7FB7E006CB520 /* ContentView.swift in Sources */,
 				B56BDCDB28CE6B80007517E3 /* GhostListView.swift in Sources */,
 				B5370EE028C9390D001566FF /* Ghosts.swift in Sources */,
 				B56BDCDD28CE6B8D007517E3 /* GhostDetailView.swift in Sources */,
 				B528CE2928CF66F600F9FC6F /* Evidence.swift in Sources */,
+				B5404BA128D3BB2F00489FFE /* Aspects.swift in Sources */,
 				B545959F28C7FB7E006CB520 /* GhostyApp.swift in Sources */,
 				B5370EDA28C93139001566FF /* LoadingView.swift in Sources */,
+				B5404BA728D3BC4A00489FFE /* AspectDetailView.swift in Sources */,
 				B56BDCE028CE6C8E007517E3 /* InvestigationView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -347,7 +367,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3.0;
+				MARKETING_VERSION = 1.3.1;
 				PRODUCT_BUNDLE_IDENTIFIER = zgamelogic.Ghosty;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -378,7 +398,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3.0;
+				MARKETING_VERSION = 1.3.1;
 				PRODUCT_BUNDLE_IDENTIFIER = zgamelogic.Ghosty;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

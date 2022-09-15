@@ -11,32 +11,38 @@ struct GhostListView: View {
     
     @State var ghosts: Ghosts
     
+    @State var searched = ""
+    
     var body: some View {
         NavigationView {
             List {
                 ForEach (ghosts.ghosts.sorted {
                     $0.name < $1.name
                 }) { ghost in
-                    NavigationLink {
-                        GhostDetailView(ghost: ghost)
-                    } label: {
-                        VStack {
-                            HStack {
-                                Text(ghost.name).font(.headline)
-                                Spacer()
-                            }
-                            HStack{
-                                ForEach(ghost.evidence.sorted {
-                                    $0 < $1
-                                }, id: \.self) { e in
-                                    Text(e).font(.caption).italic()
+                    if(ghost.name.contains(searched) || searched == ""){
+                        NavigationLink {
+                            GhostDetailView(ghost: ghost)
+                        } label: {
+                            VStack {
+                                HStack {
+                                    Text(ghost.name).font(.headline)
+                                    Spacer()
                                 }
-                                Spacer()
+                                HStack{
+                                    ForEach(ghost.evidence.sorted {
+                                        $0 < $1
+                                    }, id: \.self) { e in
+                                        Text(e).font(.caption).italic()
+                                    }
+                                    Spacer()
+                                }
                             }
                         }
                     }
                 }
-            }.navigationTitle("Ghosts")
+            }
+            .searchable(text: $searched)
+            .navigationTitle("Ghosts")
         }
     }
 }

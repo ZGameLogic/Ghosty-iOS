@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-private let PROGRESS_STEP = 0.5
+private let PROGRESS_STEP = 0.25
 
 struct LoadingView: View {
     
@@ -16,6 +16,7 @@ struct LoadingView: View {
     
     @Binding var ghosts : Ghosts
     @Binding var evidences : Evidences
+    @Binding var aspects : Aspects
     
     @State var showError = false
     
@@ -45,6 +46,7 @@ struct LoadingView: View {
     private func loadData(){
         loadGhosts()
         loadEvidence()
+        loadAspects()
     }
     
     private func loadEvidence(){
@@ -59,6 +61,29 @@ struct LoadingView: View {
                         if let response = try? JSONDecoder().decode(Evidences.self, from: data) {
                             DispatchQueue.main.async {
                                 self.evidences = response
+                                progress += PROGRESS_STEP
+                            }
+                            return
+                        }
+                    } else {
+                        showError = true
+                    }
+                }.resume()
+    }
+    
+    private func loadAspects(){
+        guard let url = URL(string: "https://zgamelogic.com/api/ghosty/Aspects") else {
+                  return
+              }
+        
+        let request = URLRequest(url: url)
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
+                    if let data = data {
+                        if let response = try? JSONDecoder().decode(Aspects.self, from: data) {
+                            DispatchQueue.main.async {
+                                self.aspects = response
+                                progress += PROGRESS_STEP
                                 progress += PROGRESS_STEP
                             }
                             return
