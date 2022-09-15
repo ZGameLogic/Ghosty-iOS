@@ -9,6 +9,8 @@ import SwiftUI
 
 struct InvestigationView: View {
     
+    let PURPLE_COLOR = Color(red: 160 / 255.0, green: 64 / 255.0, blue: 201 / 255.0)
+    
     @ObservedObject var model = InvestigationViewModel()
     
     @State var orientation = UIDevice.current.orientation
@@ -34,24 +36,32 @@ struct InvestigationView: View {
     var body: some View {
         NavigationView{
             VStack {
-                Section("Evidence Gathered"){
+                Section(header: Text("Evidence").font(.title)){
                     List{
                         ForEach (evidences, id: \.self) {evidence in
                             Toggle(evidence,
                                    isOn: model.checkedBinding(for: evidence)
                             ).disabled(model.evidencesDisabled[evidence]!)
+                                .tint(PURPLE_COLOR)
                         }
-                    }
+                    }.border(.gray)
                     .onChange(of: model, perform: { newValue in
                         updateView()
                     })
                     Button("Clear Evidence", action: {
                         model.clearEvidence()
                     })
-                    .padding()
+                    .padding([.bottom, .top], 10)
+                    .padding([.leading, .trailing], 20)
+                    .background(PURPLE_COLOR)
+                    .foregroundColor(.white)
+                    .clipShape(Rectangle())
+                    .cornerRadius(20.0)
                 }
                 
-                Section("Remaining ghosts"){
+                Divider()
+                    .overlay(.gray)
+                Section(header: Text("Ghosts").font(.title)){
                     List {
                         ForEach(remainingGhosts.sorted {
                             $0.name < $1.name
@@ -75,7 +85,7 @@ struct InvestigationView: View {
                                 }
                             }
                         }
-                    }
+                    }.border(.gray)
                 }
             }.navigationTitle("Investigation")
         }
