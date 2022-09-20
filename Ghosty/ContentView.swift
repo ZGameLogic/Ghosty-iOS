@@ -33,9 +33,9 @@ struct ContentView: View {
                 }).tag(2)
                 AspectListView(aspects: apiAspects)
                 .tabItem ({
-                    Label("Aspects", systemImage: "books.vertical")
+                    Label("Aspects", systemImage: "book.closed.fill")
                 }).tag(3)
-        }
+            }
         }
     }
 }
