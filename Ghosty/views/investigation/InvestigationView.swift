@@ -38,7 +38,7 @@ struct InvestigationView: View {
             VStack {
                 Section(header: Text("Evidence").font(.title)){
                     List{
-                        ForEach (evidences, id: \.self) {evidence in
+                        ForEach (evidences.sorted(by: {$0 < $1}), id: \.self) {evidence in
                             Toggle(evidence,
                                    isOn: model.checkedBinding(for: evidence)
                             ).disabled(model.evidencesDisabled[evidence]!)
@@ -86,6 +86,7 @@ struct InvestigationView: View {
                             }
                         }
                     }.border(.gray)
+                    Spacer()
                 }
             }.navigationTitle("Investigation")
         }
