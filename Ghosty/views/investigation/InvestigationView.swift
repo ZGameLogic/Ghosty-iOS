@@ -34,7 +34,7 @@ struct InvestigationView: View {
     }
     
     var body: some View {
-        NavigationView{
+        NavigationView {
             VStack {
                 Section(header: Text("Evidence").font(.title)){
                     List{
