@@ -18,7 +18,10 @@ struct GhostDetailView: View {
                 Spacer()
                 HStack {
                     ForEach(ghost.evidence, id: \.self) { e in
-                        Text(e).padding()
+                        Text(e)
+                            .padding()
+                            .minimumScaleFactor(0.01)
+                            .lineLimit(2)
                     }
                 }
                 Spacer()

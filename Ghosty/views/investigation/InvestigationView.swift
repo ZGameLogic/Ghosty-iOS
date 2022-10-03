@@ -43,6 +43,7 @@ struct InvestigationView: View {
                                    isOn: model.checkedBinding(for: evidence)
                             ).disabled(model.evidencesDisabled[evidence]!)
                                 .tint(PURPLE_COLOR)
+                                .minimumScaleFactor(0.20)
                         }
                     }.border(.gray)
                     .onChange(of: model, perform: { newValue in
@@ -78,7 +79,9 @@ struct InvestigationView: View {
                                         ForEach(ghost.remainingEvidence(currentEvidence: currentEvidence).sorted {
                                             $0 < $1
                                         }, id: \.self) { e in
-                                            Text(e).font(.caption).italic()
+                                            Text(e)
+                                                .font(.caption)
+                                                .italic()
                                         }
                                         Spacer()
                                     }
