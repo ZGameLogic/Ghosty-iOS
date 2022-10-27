@@ -21,26 +21,31 @@ struct LoadingView: View {
     @State var showError = false
     
     var body: some View {
-        ProgressView("Loading data from ghosty API", value: progress)
-            .progressViewStyle(LinearProgressViewStyle(tint: .purple)).padding()
-            .onAppear(perform: loadData)
-            .onChange(of: progress, perform: { old in
-                if(progress >= 1.0){
-                    isShowing = false
-                }
-            })
-            .alert("Unable to connect to GhostyAPI",
-                isPresented: $showError,
-                actions: {
+        VStack {
+            Text("Loading data from ghosty API")
+            ProgressView("", value: progress)
+                .progressViewStyle(LinearProgressViewStyle(tint: .purple)).padding()
+                .onAppear(perform: loadData)
+                .scaleEffect(y: 4)
+                .padding()
+                .onChange(of: progress, perform: { old in
+                    if(progress >= 1.0){
+                        isShowing = false
+                    }
+                })
+                .alert("Unable to connect to GhostyAPI",
+                       isPresented: $showError,
+                       actions: {
                     Button("Okay", action: {})
                     Button("Try again", action: {
                         showError = false
                         loadData()
                     })
                 },
-                message: {
+                       message: {
                     Text("Make sure you are connected to the internet")
-            })
+                })
+        }
     }
     
     private func loadData(){

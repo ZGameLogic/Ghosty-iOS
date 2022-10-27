@@ -10,6 +10,7 @@ import SwiftUI
 struct GhostDetailView: View {
     
     @State var ghost: Ghost
+    @Environment(\.horizontalSizeClass) var horizontalSizeClass
     
     var body: some View {
         ScrollView {
@@ -27,6 +28,11 @@ struct GhostDetailView: View {
                 Spacer()
                 Text(ghost.description).padding()
             }
+        }
+        if(horizontalSizeClass == .compact){
+            Text("compact")
+        } else {
+            Text("not compact")
         }
     }
 }

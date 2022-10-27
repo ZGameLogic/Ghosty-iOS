@@ -29,11 +29,11 @@ struct ContentView: View {
                 }).tag(1)
                 GhostListView(ghosts: apiGhosts)
                 .tabItem({
-                    Label("Journal", systemImage: "books.vertical")
+                    Label("Journal", systemImage: "book.closed.fill")
                 }).tag(2)
                 AspectListView(aspects: apiAspects)
                 .tabItem ({
-                    Label("Aspects", systemImage: "book.closed.fill")
+                    Label("Aspects", systemImage: "books.vertical")
                 }).tag(3)
             }
         }
