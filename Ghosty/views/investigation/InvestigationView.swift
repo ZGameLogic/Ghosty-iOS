@@ -15,84 +15,107 @@ struct InvestigationView: View {
     
     @State var orientation = UIDevice.current.orientation
     
-    @State var ghosts : [Ghost]
-    @State var evidences : [String]
+    @State var ghosts : [Ghost] = []
+    @State var evidences : [String] = []
     
     @State var currentEvidence : [String] = []
     
-    @State var remainingGhosts : [Ghost]
+    @State var remainingGhosts : [Ghost] = []
     
     @State var disabled = false
     
-    init(ghosts: [Ghost], evidences: [String]){
-        self.ghosts = ghosts
-        self.evidences = evidences
-        remainingGhosts = ghosts
-        for evidence in evidences {
-            model.addEvidence(evidence: evidence)
-        }
-    }
+    @State var isLoadingGhosts = true
+    @State var isLoadingEvidence = true
+    @State var showError = false
     
     var body: some View {
         NavigationView {
-            VStack {
-                Section(header: Text("Evidence").font(.title)){
-                    List{
-                        ForEach (evidences.sorted(by: {$0 < $1}), id: \.self) {evidence in
-                            Toggle(evidence,
-                                   isOn: model.checkedBinding(for: evidence)
-                            ).disabled(model.evidencesDisabled[evidence]!)
-                                .tint(PURPLE_COLOR)
-                                .minimumScaleFactor(0.20)
-                        }
-                    }.border(.gray)
-                    .onChange(of: model, perform: { newValue in
-                        updateView()
-                    })
-                    Button("Clear Evidence", action: {
-                        model.clearEvidence()
-                    })
-                    .padding([.bottom, .top], 10)
-                    .padding([.leading, .trailing], 20)
-                    .background(PURPLE_COLOR)
-                    .foregroundColor(.white)
-                    .clipShape(Rectangle())
-                    .cornerRadius(20.0)
-                }
-                
-                Divider()
-                    .overlay(.gray)
-                Section(header: Text("Ghosts").font(.title)){
-                    List {
-                        ForEach(remainingGhosts.sorted {
-                            $0.name < $1.name
-                        }, id:\.name) { ghost in
-                            NavigationLink {
-                                GhostDetailView(ghost: ghost)
-                            } label: {
-                                VStack {
-                                    HStack {
-                                        Text(ghost.name).font(.headline)
-                                        Spacer()
-                                    }
-                                    HStack{
-                                        ForEach(ghost.remainingEvidence(currentEvidence: currentEvidence).sorted {
-                                            $0 < $1
-                                        }, id: \.self) { e in
-                                            Text(e)
-                                                .font(.caption)
-                                                .italic()
+            if(isLoadingGhosts || isLoadingEvidence){
+                ProgressView()
+            } else {
+                VStack {
+                    Section(header: Text("Evidence").font(.title)){
+                        List{
+                            ForEach (evidences.sorted(by: {$0 < $1}), id: \.self) {evidence in
+                                Toggle(evidence,
+                                       isOn: model.checkedBinding(for: evidence)
+                                ).disabled(model.evidencesDisabled[evidence] ?? false)
+                                    .tint(PURPLE_COLOR)
+                                    .minimumScaleFactor(0.20)
+                            }
+                        }.border(.gray)
+                            .onChange(of: model, perform: { newValue in
+                                updateView()
+                            })
+                        Button("Clear Evidence", action: {
+                            model.clearEvidence()
+                        })
+                        .padding([.bottom, .top], 10)
+                        .padding([.leading, .trailing], 20)
+                        .background(PURPLE_COLOR)
+                        .foregroundColor(.white)
+                        .clipShape(Rectangle())
+                        .cornerRadius(20.0)
+                    }
+                    
+                    Divider()
+                        .overlay(.gray)
+                    Section(header: Text("Ghosts").font(.title)){
+                        List {
+                            ForEach(remainingGhosts.sorted {
+                                $0.name < $1.name
+                            }, id:\.name) { ghost in
+                                NavigationLink {
+                                    GhostDetailView(ghost: ghost)
+                                } label: {
+                                    VStack {
+                                        HStack {
+                                            Text(ghost.name).font(.headline)
+                                            Spacer()
                                         }
-                                        Spacer()
+                                        HStack{
+                                            ForEach(ghost.remainingEvidence(currentEvidence: currentEvidence).sorted {
+                                                $0 < $1
+                                            }, id: \.self) { e in
+                                                Text(e)
+                                                    .font(.caption)
+                                                    .italic()
+                                            }
+                                            Spacer()
+                                        }
                                     }
                                 }
                             }
-                        }
-                    }.border(.gray)
-                    Spacer()
-                }
-            }.navigationTitle("Investigation")
-        }
+                        }.border(.gray)
+                        Spacer()
+                    }
+                    
+                }.navigationTitle("Investigation")
+                    .alert("Unable to connect to GhostyAPI",
+                           isPresented: $showError,
+                           actions: {
+                        Button("Okay", action: {})
+                        Button("Try again", action: {
+                            showError = false
+                            loadData()
+                        })
+                    },
+                           message: {
+                        Text("Make sure you are connected to the internet")
+                    })
+            }
+        }.onAppear(perform: {
+            if(isLoadingGhosts && isLoadingEvidence){
+                loadData()
+            }
+        })
+    }
+    
+    private func loadData(){
+        isLoadingGhosts = true
+        isLoadingEvidence = true
+        loadGhosts()
+        loadEvidence()
     }
     
     
@@ -124,11 +147,59 @@ struct InvestigationView: View {
         }
     }
     
+    private func loadEvidence(){
+        guard let url = URL(string: "https://zgamelogic.com/api/ghosty/Evidence") else {
+                  return
+              }
+        
+        let request = URLRequest(url: url)
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
+                    if let data = data {
+                        if let response = try? JSONDecoder().decode(Evidences.self, from: data) {
+                            DispatchQueue.main.async {
+                                self.evidences = response.evidence
+                                isLoadingEvidence = false
+                                for evidence in evidences {
+                                    model.addEvidence(evidence: evidence)
+                                }
+                            }
+                            return
+                        }
+                    } else {
+                        showError = true
+                    }
+                }.resume()
+    }
+    
+    private func loadGhosts(){
+        guard let url = URL(string: "https://zgamelogic.com/api/ghosty/Ghosts2") else {
+                  return
+              }
+        
+        let request = URLRequest(url: url)
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
+                    if let data = data {
+                        if let response = try? JSONDecoder().decode(Ghosts.self, from: data) {
+                            DispatchQueue.main.async {
+                                self.ghosts = response.ghosts
+                                remainingGhosts = ghosts
+                                isLoadingGhosts = false
+                            }
+                            return
+                        }
+                    } else {
+                        showError = true
+                    }
+                }.resume()
+    }
+    
 }
 
 struct InvestigationView_Previews: PreviewProvider {
     static var previews: some View {
-        InvestigationView(ghosts: [Ghost(id: 1, evidence: ["Finger prints"], name: "Ben", description: "Spooky ghost")], evidences: ["Finger Prints", "EMF Level 5", "Freezing Temperatures", "Spirit Box", "Ghost Writing"])
+        InvestigationView(ghosts: [Ghost(id: 1, evidence: ["Finger prints"], name: "Ben", description: "Spooky ghost")], evidences: ["Finger Prints", "EMF Level 5", "Freezing Temperatures", "Spirit Box", "Ghost Writing"], remainingGhosts: [])
             .previewInterfaceOrientation(.portrait)
     }
 }
@@ -175,4 +246,5 @@ public class InvestigationViewModel: ObservableObject, Equatable {
         }
         return false
     }
+    
 }

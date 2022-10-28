@@ -11,7 +11,7 @@ import SwiftUI
 struct GhostyApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView(apiGhosts: Ghosts(ghosts: []), apiEvidence: Evidences(evidence: []), apiAspects: Aspects(aspects: []))
+            ContentView()
         }
     }
 }

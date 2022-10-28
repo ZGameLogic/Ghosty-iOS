@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		B528CE2928CF66F600F9FC6F /* Evidence.swift in Sources */ = {isa = PBXBuildFile; fileRef = B528CE2828CF66F600F9FC6F /* Evidence.swift */; };
-		B5370EDA28C93139001566FF /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5370ED928C93139001566FF /* LoadingView.swift */; };
 		B5370EE028C9390D001566FF /* Ghosts.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5370EDF28C9390D001566FF /* Ghosts.swift */; };
 		B5404BA128D3BB2F00489FFE /* Aspects.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5404BA028D3BB2F00489FFE /* Aspects.swift */; };
 		B5404BA528D3BC3D00489FFE /* AspectListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5404BA428D3BC3D00489FFE /* AspectListView.swift */; };
@@ -25,7 +24,6 @@
 /* Begin PBXFileReference section */
 		B528CE2828CF66F600F9FC6F /* Evidence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Evidence.swift; sourceTree = "<group>"; };
 		B528CE2A28CFA03800F9FC6F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		B5370ED928C93139001566FF /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		B5370EDF28C9390D001566FF /* Ghosts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ghosts.swift; sourceTree = "<group>"; };
 		B5404BA028D3BB2F00489FFE /* Aspects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Aspects.swift; sourceTree = "<group>"; };
 		B5404BA428D3BC3D00489FFE /* AspectListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AspectListView.swift; sourceTree = "<group>"; };
@@ -57,7 +55,6 @@
 				B5404BA328D3BC1F00489FFE /* aspects */,
 				B56BDCDE28CE6C73007517E3 /* investigation */,
 				B56BDCD928CE6B62007517E3 /* ghost */,
-				B5370ED928C93139001566FF /* LoadingView.swift */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -222,7 +219,6 @@
 				B528CE2928CF66F600F9FC6F /* Evidence.swift in Sources */,
 				B5404BA128D3BB2F00489FFE /* Aspects.swift in Sources */,
 				B545959F28C7FB7E006CB520 /* GhostyApp.swift in Sources */,
-				B5370EDA28C93139001566FF /* LoadingView.swift in Sources */,
 				B5404BA728D3BC4A00489FFE /* AspectDetailView.swift in Sources */,
 				B56BDCE028CE6C8E007517E3 /* InvestigationView.swift in Sources */,
 			);
@@ -351,7 +347,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Ghosty/Preview Content\"";
 				DEVELOPMENT_TEAM = 6M38R97L4D;
 				ENABLE_PREVIEWS = YES;
@@ -367,7 +363,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3.3;
+				MARKETING_VERSION = 1.4.0;
 				PRODUCT_BUNDLE_IDENTIFIER = zgamelogic.Ghosty;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -382,7 +378,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Ghosty/Preview Content\"";
 				DEVELOPMENT_TEAM = 6M38R97L4D;
 				ENABLE_PREVIEWS = YES;
@@ -398,7 +394,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3.3;
+				MARKETING_VERSION = 1.4.0;
 				PRODUCT_BUNDLE_IDENTIFIER = zgamelogic.Ghosty;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
