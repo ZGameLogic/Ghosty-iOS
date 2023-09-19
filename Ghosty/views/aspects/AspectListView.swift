@@ -46,9 +46,9 @@ struct AspectListView: View {
     }
     
     private func loadAspects(){
-        guard let url = URL(string: "https://zgamelogic.com/api/ghosty/Aspects") else {
-                  return
-              }
+        guard let url = URL(string: "https://zgamelogic.com:2006/ghosty/Aspects") else {
+            return
+          }
         
         let request = URLRequest(url: url)
         

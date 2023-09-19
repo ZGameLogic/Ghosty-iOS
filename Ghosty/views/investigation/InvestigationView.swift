@@ -148,7 +148,7 @@ struct InvestigationView: View {
     }
     
     private func loadEvidence(){
-        guard let url = URL(string: "https://zgamelogic.com/api/ghosty/Evidence") else {
+        guard let url = URL(string: "https://zgamelogic.com:2006/ghosty/Evidence") else {
                   return
               }
         
@@ -173,7 +173,7 @@ struct InvestigationView: View {
     }
     
     private func loadGhosts(){
-        guard let url = URL(string: "https://zgamelogic.com/api/ghosty/Ghosts2") else {
+        guard let url = URL(string: "https://zgamelogic.com:2006/ghosty/Ghosts2") else {
                   return
               }
         
