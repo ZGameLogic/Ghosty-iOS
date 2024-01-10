@@ -148,7 +148,7 @@ struct InvestigationView: View {
     }
     
     private func loadEvidence(){
-        guard let url = URL(string: "https://zgamelogic.com/ghosty/Evidence") else {
+        guard let url = URL(string: "\(Constants.URL)/Evidence") else {
                   return
               }
         

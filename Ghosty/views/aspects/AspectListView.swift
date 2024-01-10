@@ -46,25 +46,24 @@ struct AspectListView: View {
     }
     
     private func loadAspects(){
-        guard let url = URL(string: "https://zgamelogic.com/ghosty/Aspects") else {
+        guard let url = URL(string: "\(Constants.URL)/Aspects") else {
             return
           }
-        
         let request = URLRequest(url: url)
         
         URLSession.shared.dataTask(with: request) { data, response, error in
-                    if let data = data {
-                        if let response = try? JSONDecoder().decode(Aspects.self, from: data) {
-                            DispatchQueue.main.async {
-                                self.aspects = response
-                                isLoadingAspects = false
-                            }
-                            return
-                        }
-                    } else {
-                        showError = true
+            if let data = data {
+                if let response = try? JSONDecoder().decode(Aspects.self, from: data) {
+                    DispatchQueue.main.async {
+                        self.aspects = response
+                        isLoadingAspects = false
                     }
-                }.resume()
+                    return
+                }
+            } else {
+                showError = true
+            }
+        }.resume()
     }
     
 }

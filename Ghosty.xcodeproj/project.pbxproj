@@ -19,6 +19,7 @@
 		B56BDCDB28CE6B80007517E3 /* GhostListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56BDCDA28CE6B80007517E3 /* GhostListView.swift */; };
 		B56BDCDD28CE6B8D007517E3 /* GhostDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56BDCDC28CE6B8D007517E3 /* GhostDetailView.swift */; };
 		B56BDCE028CE6C8E007517E3 /* InvestigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56BDCDF28CE6C8E007517E3 /* InvestigationView.swift */; };
+		B581B5C52B4EDB02006205D7 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B581B5C42B4EDB02006205D7 /* Constants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		B56BDCDA28CE6B80007517E3 /* GhostListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GhostListView.swift; sourceTree = "<group>"; };
 		B56BDCDC28CE6B8D007517E3 /* GhostDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GhostDetailView.swift; sourceTree = "<group>"; };
 		B56BDCDF28CE6C8E007517E3 /* InvestigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvestigationView.swift; sourceTree = "<group>"; };
+		B581B5C42B4EDB02006205D7 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +67,7 @@
 				B5370EDF28C9390D001566FF /* Ghosts.swift */,
 				B528CE2828CF66F600F9FC6F /* Evidence.swift */,
 				B5404BA028D3BB2F00489FFE /* Aspects.swift */,
+				B581B5C42B4EDB02006205D7 /* Constants.swift */,
 			);
 			path = data;
 			sourceTree = "<group>";
@@ -212,6 +215,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B5404BA528D3BC3D00489FFE /* AspectListView.swift in Sources */,
+				B581B5C52B4EDB02006205D7 /* Constants.swift in Sources */,
 				B54595A128C7FB7E006CB520 /* ContentView.swift in Sources */,
 				B56BDCDB28CE6B80007517E3 /* GhostListView.swift in Sources */,
 				B5370EE028C9390D001566FF /* Ghosts.swift in Sources */,
