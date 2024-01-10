@@ -69,7 +69,7 @@ struct GhostListView: View {
     }
     
     private func loadGhosts(){
-        guard let url = URL(string: "https://zgamelogic.com:2006/ghosty/Ghosts2") else {
+        guard let url = URL(string: "https://zgamelogic.com/ghosty/Ghosts2") else {
                   return
               }
         
